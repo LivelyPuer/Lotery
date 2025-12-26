@@ -1,0 +1,663 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+:root {
+  --bg-dark: #012b1d;
+  --bg-darker: #001a12;
+  --card-red: #d42426;
+  --card-green: #0d4a2a;
+  --festive-gold: #ffd700;
+  --text-white: #ffffff;
+  --text-grey: #a0aec0;
+  --candy-red: #ff3e3e;
+  --candy-white: #ffffff;
+  --star-red: #ff4d4d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  background-image:
+    radial-gradient(circle at top right, rgba(22, 91, 51, 0.4), transparent),
+    radial-gradient(circle at bottom left, rgba(212, 36, 38, 0.2), transparent);
+  color: var(--text-white);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#root {
+  width: 100%;
+}
+
+.app-container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-dark);
+  overflow: hidden;
+}
+
+/* --- DECORATIONS --- */
+
+/* Garland */
+.garland {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: relative;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.light:nth-child(odd) {
+  background: var(--festive-gold);
+  animation-name: glow-gold;
+}
+
+.light:nth-child(even) {
+  background: var(--candy-red);
+  animation-name: glow-red;
+  animation-delay: 0.5s;
+}
+
+@keyframes glow-gold {
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px var(--festive-gold);
+    opacity: 0.5;
+  }
+
+  50% {
+    box-shadow: 0 0 20px var(--festive-gold);
+    opacity: 1;
+  }
+}
+
+@keyframes glow-red {
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px var(--candy-red);
+    opacity: 0.5;
+  }
+
+  50% {
+    box-shadow: 0 0 20px var(--candy-red);
+    opacity: 1;
+  }
+}
+
+/* Animated Stars */
+.star-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.falling-star {
+  position: absolute;
+  color: var(--star-red);
+  font-size: 20px;
+  animation: fall linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* Tinsel/Mishura - Static Decoration */
+.tinsel-top {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #ffd700, #ff4d4d, #165b33, #ffd700);
+  background-size: 300% 100%;
+  animation: shine-tinsel 3s linear infinite;
+  z-index: 99;
+}
+
+@keyframes shine-tinsel {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Christmas Trees in corners */
+.tree-decor {
+  position: absolute;
+  bottom: -20px;
+  font-size: 100px;
+  opacity: 0.3;
+  pointer-events: none;
+  filter: blur(1px);
+}
+
+.tree-left {
+  left: 20px;
+  transform: rotate(-10deg);
+}
+
+.tree-right {
+  right: 20px;
+  transform: rotate(10deg);
+}
+
+/* --- UI ELEMENTS --- */
+
+.header {
+  padding: 10px 30px;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 800;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.content {
+  flex: 1;
+  padding: 10px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.home-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+}
+
+.input-game {
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 18px;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+  width: 100%;
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+  margin-top: 10px;
+}
+
+.input-game:focus {
+  border-color: var(--festive-gold);
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2), inset 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.input-game::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.stats-card {
+  background: linear-gradient(135deg, #b21d1f 0%, #d42426 100%);
+  border-radius: 15px;
+  padding: 10px 20px;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: block;
+  /* Remove flex to let content take full width */
+}
+
+.stats-card-main {
+  flex: 1;
+}
+
+/* QR Code Section */
+.qr-container {
+  background: white;
+  padding: 10px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-left: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.qr-label {
+  color: #333;
+  font-size: 0.6rem;
+  font-weight: 800;
+}
+
+.room-info-badge {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 12px 24px;
+  border-radius: 15px;
+  font-family: monospace;
+  font-size: 1.6rem;
+  color: var(--festive-gold);
+  border: 1px dashed var(--festive-gold);
+}
+
+.progress-container {
+  background: rgba(0, 0, 0, 0.4);
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+  position: relative;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar {
+  height: 100%;
+  background: repeating-linear-gradient(45deg,
+      var(--candy-red),
+      var(--candy-red) 15px,
+      var(--candy-white) 15px,
+      var(--candy-white) 30px);
+  transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.progress-text {
+  position: absolute;
+  right: 15px;
+  top: -28px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--festive-gold);
+}
+
+/* Santa Dialogue area */
+.santa-section {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px 15px;
+  border-radius: 15px;
+}
+
+.santa-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 4px solid var(--text-white);
+  object-fit: cover;
+  animation: wiggle 3s infinite ease-in-out;
+}
+
+@keyframes wiggle {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(5deg);
+  }
+
+  75% {
+    transform: rotate(-5deg);
+  }
+}
+
+.dialogue-bubble {
+  flex: 1;
+  background: #fbc02d;
+  border-radius: 18px;
+  padding: 15px 25px;
+  color: #4a3411;
+  position: relative;
+  font-weight: 800;
+  font-size: 1rem;
+  text-transform: uppercase;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dialogue-bubble::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 20px;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 18px solid #fbc02d;
+}
+
+/* Ticket Grid */
+.ticket-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  grid-auto-rows: 40px;
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow-y: auto;
+  /* Allow scrolling if too many tickets but default tries to fit */
+}
+
+/* Hide scrollbar but keep functionality */
+.ticket-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.ticket-slot {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.15);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ticket-slot.active {
+  background: linear-gradient(135deg, var(--card-green), #1b854a);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.ticket-slot.winner {
+  background: linear-gradient(135deg, var(--festive-gold), #ffeb3b);
+  color: #333;
+  box-shadow: 0 0 25px var(--festive-gold);
+  transform: scale(1.2) rotate(5deg);
+  z-index: 2;
+}
+
+/* Roulette */
+.roulette-container {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.roulette-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background: var(--festive-gold);
+  z-index: 10;
+  box-shadow: 0 0 15px var(--festive-gold);
+  transform: translateX(-50%);
+}
+
+.roulette-strip {
+  display: flex;
+  height: 80px;
+  gap: 10px;
+  padding: 0 50%;
+  transition: transform 5s cubic-bezier(0.1, 0, 0.1, 1);
+  will-change: transform;
+}
+
+.roulette-strip.instant {
+  transition: none !important;
+}
+
+.roulette-item {
+  flex: 0 0 80px;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 900;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.roulette-item.winner-glow {
+  background: linear-gradient(135deg, var(--festive-gold), #ffeb3b);
+  color: #333;
+  box-shadow: 0 0 20px var(--festive-gold);
+}
+
+.ticket-slot.played {
+  background: rgba(255, 215, 0, 0.1) !important;
+  border-color: rgba(255, 215, 0, 0.3);
+  color: var(--festive-gold);
+  border-style: solid;
+  opacity: 0.6;
+}
+
+/* Winners History */
+.winners-history {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.winners-history-label {
+  font-size: 0.8rem;
+  font-weight: 900;
+  color: var(--festive-gold);
+  white-space: nowrap;
+}
+
+.winners-list {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+  flex: 1;
+}
+
+.winners-list::-webkit-scrollbar {
+  height: 4px;
+}
+
+.winners-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.2);
+  border-radius: 2px;
+}
+
+.winner-tag {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  animation: slide-in 0.3s ease-out;
+}
+
+.winner-tag.current {
+  background: var(--festive-gold);
+  color: #333;
+  box-shadow: 0 0 10px var(--festive-gold);
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Lobby / QR Center */
+.lobby-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 30px;
+  text-align: center;
+  padding: 40px;
+}
+
+.lobby-qr-wrapper {
+  background: white;
+  padding: 30px;
+  border-radius: 30px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.lobby-info {
+  margin-top: 20px;
+}
+
+.lobby-link {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px 30px;
+  border-radius: 12px;
+  font-family: monospace;
+  font-size: 1.2rem;
+  color: var(--festive-gold);
+  margin: 20px 0;
+  border: 1px dashed rgba(255, 215, 0, 0.3);
+}
+
+/* Controls Panel */
+.controls-panel {
+  padding: 10px 40px;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.btn-game {
+  background: linear-gradient(180deg, #ff4d4d 0%, #d42426 100%);
+  color: white;
+  border: none;
+  padding: 20px 60px;
+  border-radius: 15px;
+  font-weight: 900;
+  font-size: 1.4rem;
+  box-shadow: 0 8px 0 #8b181a, 0 10px 25px rgba(212, 36, 38, 0.4);
+  cursor: pointer;
+  transition: all 0.1s;
+  text-transform: uppercase;
+}
+
+.btn-game:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.btn-game:active {
+  transform: translateY(6px);
+  box-shadow: 0 2px 0 #8b181a;
+}
+
+.exit-btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-grey);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.exit-btn:hover {
+  background: rgba(212, 36, 38, 0.2);
+  color: white;
+  border-color: var(--card-red);
+}
