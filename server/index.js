@@ -91,7 +91,7 @@ io.on('connection', (socket) => {
 });
 
 // Handle SPA routing
-app.get('/:path*', (req, res) => {
+app.use((req, res) => {
     res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
 });
 
