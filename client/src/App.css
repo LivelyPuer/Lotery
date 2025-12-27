@@ -560,6 +560,42 @@ body {
   }
 }
 
+/* Ticket visibility */
+.user-ticket-badge {
+  background: var(--festive-gold);
+  color: #333;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 900;
+  box-shadow: 0 0 10px var(--festive-gold);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-ticket-badge span {
+  font-size: 1.2rem;
+  color: #000;
+}
+
+.stats-ticket-info {
+  margin-top: 15px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 800;
+  border: 1px dashed var(--festive-gold);
+  color: white;
+}
+
+.stats-ticket-info strong {
+  color: var(--festive-gold);
+  font-size: 1.5rem;
+  margin-left: 10px;
+}
+
 /* Lobby / QR Center */
 .lobby-view {
   display: flex;

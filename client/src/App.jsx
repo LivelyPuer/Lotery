@@ -198,6 +198,9 @@ function App() {
       <>
         <div className="header">
           <span>❄️ Лотерея Деда Мороза</span>
+          {!isCreator && ticketNumber && (
+            <div className="user-ticket-badge">ВАШ БИЛЕТ: <span>{ticketNumber}</span></div>
+          )}
           <button className="exit-btn" onClick={() => setView('home')}>ВЫЙТИ ИЗ КОМНАТЫ</button>
         </div>
 
@@ -214,6 +217,12 @@ function App() {
                 <div className="progress-bar" style={{ width: `${progress}%` }}></div>
                 <div className="progress-text">УЧАСТНИКОВ: {participantCount} / {maxTickets}</div>
               </div>
+
+              {!isCreator && ticketNumber && (
+                <div className="stats-ticket-info">
+                  ВАШ СЧАСТЛИВЫЙ НОМЕР: <strong>{ticketNumber}</strong>
+                </div>
+              )}
             </div>
           </div>
 
